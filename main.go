@@ -40,14 +40,46 @@ func Test(slice []int) {
 	fmt.Println(slice)
 }
 
-func main() {
-	for i := 0; i < 7; i++ {
-		a[i] = i
-	}
+type A struct{}
+type B struct{}
 
-	Test(a)
-	fmt.Println(a)
+func (_ A) Print()  { fmt.Printf("A printed\n") }
+func (_ B) Print()  { fmt.Printf("B printed\n") }
+func (a A) PrintA() { a.Print() }
+
+type C struct {
+	A
+	*B
 }
+
+func main() {
+	var c C
+	c.B = &B{}
+	// Implicitly inherited
+	c.PrintA()
+	// Not allowed: ambiguous
+	// c.Print()
+	// Explicitly disambiguated
+	c.B.Print()
+	c.A.Print()
+}
+
+//func main() {
+/*for i := 0; i < 7; i++ {
+	a[i] = i
+}
+
+Test(a)
+fmt.Println(a)*/
+/*str := "abc"
+addr := &str
+str2 := "123"
+fmt.Printf(str2)
+str2 = *addr
+fmt.Printf(str2)
+str2 = "aaa"
+fmt.Printf(str)*/
+//}
 
 //func main() {
 //a := []byte{2, 2}
