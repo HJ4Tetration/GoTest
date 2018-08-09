@@ -4,10 +4,6 @@ import (
 	"fmt"
 )
 
-type I interface {
-	test()
-}
-
 type V struct {
 	x, y int
 }

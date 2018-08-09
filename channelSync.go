@@ -2,15 +2,14 @@ package main
 
 import (
 	"fmt"
-	"sync"
 )
 
-func foo(c chan int, wg *sync.WaitGroup) {
+/*func foo(c chan int, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for i := 1; i < 10; i++ {
 		c <- i
 	}
-}
+}*/
 
 func test(b []int) {
 	b[0] = 100
@@ -55,16 +54,17 @@ func (t T) M() int {
 	}
 }*/
 
-/*func foo(c chan int) {
+func foo(c chan int) {
 	for i := 1; i < 10; i++ {
 		c <- i
 	}
+	close(c)
 }
 
-func main() {
+/*func main() {
 	c := make(chan int, 30)
-	go foo(c, &wg)
-	go foo(c, &wg)
+	go foo(c)
+	//go foo(c, &wg)
 
 	for value, ok := <-c; ok; value, ok = <-c {
 		fmt.Println(value)
