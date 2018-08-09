@@ -32,3 +32,7 @@ const (
 	length
 	update
 )
+
+func (sm safeMap) Insert(key string, value interface{}) {
+	sm <- commandData{action: insert, key: key, value: value}
+}
