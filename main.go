@@ -52,17 +52,43 @@ type C struct {
 	*B
 }
 
-func main() {
-	var c C
-	c.B = &B{}
-	// Implicitly inherited
-	c.PrintA()
-	// Not allowed: ambiguous
-	// c.Print()
-	// Explicitly disambiguated
-	c.B.Print()
-	c.A.Print()
+type myT struct {
+	a []int
+	b int
 }
+
+func (b myT) change() {
+	b.a[0] = 10
+	b.b = 100
+	fmt.Printf("%T\n", b)
+}
+
+func change(b myT) {
+	b.a[0] = 100
+}
+
+//func main() {
+//A := myT{a: []int{1, 2, 3}, b: 1}
+//fmt.Printf("%T\n", A)
+//A.change()
+//fmt.Printf("%v\n", A)
+//change(A)
+//fmt.Printf("%v\n", A)
+//var c C
+//c.B = &B{}
+// Implicitly inherited
+//c.PrintA()
+// Not allowed: ambiguous
+// c.Print()
+// Explicitly disambiguated
+/*c.B.Print()
+c.A.Print()
+var a, b string
+a = "abc"
+b = a
+b += "d"
+fmt.Printf(a)*/
+//}
 
 //func main() {
 /*for i := 0; i < 7; i++ {
